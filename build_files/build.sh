@@ -10,7 +10,7 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet
+dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet kitty
 
 
 # Use a COPR Example:
