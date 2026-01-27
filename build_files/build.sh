@@ -12,6 +12,9 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet kitty btrbk wl-mirror kanshi quickemu autofs bubblewrap
 
+# Install Google Chrome (downloads RPM directly from Google)
+dnf5 install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
