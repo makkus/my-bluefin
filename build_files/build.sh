@@ -13,7 +13,7 @@ set -ouex pipefail
 dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet kitty btrbk wl-mirror kanshi quickemu autofs bubblewrap
 
 # install emacs, but omit info (because otherwise the build fails)
-dnf5 install -y emacs emacs-client --exclude=info
+dnf5 install -y emacs emacsclient --exclude=info
 
 # Install Google Chrome (downloads RPM directly from Google)
 dnf5 install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
