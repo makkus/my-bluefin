@@ -10,7 +10,10 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet kitty btrbk wl-mirror kanshi quickemu autofs bubblewrap emacs
+dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout  xdg-desktop-portal-wlr  network-manager-applet pasystray fuzzel zile wdisplays swayidle wob syncthing telnet kitty btrbk wl-mirror kanshi quickemu autofs bubblewrap
+
+# install emacs, but omit info (because otherwise the build fails)
+dnf5 install -y emacs emacs-client --exclude=info
 
 # Install Google Chrome (downloads RPM directly from Google)
 dnf5 install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
