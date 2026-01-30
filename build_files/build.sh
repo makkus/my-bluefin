@@ -16,8 +16,8 @@ dnf5 install -y tmux blueman dex-autostart sway waybar ulauncher dunst  wlogout 
 dnf5 install -y emacs emacsclient --exclude=info
 
 # install dank material shell
-dnf copr enable -y avengemedia/dms-git
-dnf install -y dms
+dnf copr enable -y avengemedia/dms
+dnf install -y dms niri
 
 
 # Install Google Chrome (downloads RPM directly from Google)
