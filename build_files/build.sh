@@ -17,7 +17,7 @@ dnf5 install -y emacs emacsclient --exclude=info
 
 # install dank material shell
 dnf copr enable -y avengemedia/dms
-dnf install -y dms niri
+dnf install -y dms niri python3-vdirsyncer khal python3-aiohttp-oauthlib adw-gtk3-theme qt6ct
 
 
 # Install Google Chrome (downloads RPM directly from Google)
