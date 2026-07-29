@@ -2,6 +2,9 @@ export image_name := env("IMAGE_NAME", "my-bluefin") # output image name, usuall
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
 
+# This project builds container images with BlueBuild (https://blue-build.org)
+# Requires the bluebuild CLI to be installed.
+
 alias build-vm := build-qcow2
 alias rebuild-vm := rebuild-qcow2
 alias run-vm := run-vm-qcow2
@@ -65,40 +68,11 @@ sudoif command *args:
         else
             exit 1
         fi
-    }
-    sudoif {{ command }} {{ args }}
-
-# This Justfile recipe builds a container image using Podman.
-#
-# Arguments:
-#   $target_image - The tag you want to apply to the image (default: $image_name).
-#   $tag - The tag for the image (default: $default_tag).
-#
-# The script constructs the version string using the tag and the current date.
-# If the git working directory is clean, it also includes the short SHA of the current HEAD.
-#
-# just build $target_image $tag
-#
-# Example usage:
-#   just build aurora lts
-#
-# This will build an image 'aurora:lts' with DX and GDX enabled.
-#
-
-# Build the image using the specified parameters
-build $target_image=image_name $tag=default_tag:
-    #!/usr/bin/env bash
-
-    BUILD_ARGS=()
-    if [[ -z "$(git status -s)" ]]; then
-        BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
-    fi
-
-    podman build \
-        "${BUILD_ARGS[@]}" \
-        --pull=newer \
-        --tag "${target_image}:${tag}" \
-        .
+# Build the container image using BlueBuild
+# Uses the recipe defined in recipes/recipe.yml
+# Add --push to push the image after building: just build --push
+build *args:
+    bluebuild build recipes/recipe.yml {{ args }}
 
 # Command: _rootful_load_image
 # Description: This script checks if the current user is root or running under sudo. If not, it attempts to resolve the image tag using podman inspect.

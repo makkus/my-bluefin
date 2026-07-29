@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+
+name: my-bluefin
+description: "My Customized Bluefin DX Image"
+
+base-image: ghcr.io/ublue-os/bluefin-dx
+image-version: stable
+
+modules:
+  # Make /opt immutable (migrated from Containerfile line 26)
+  - type: script
+    snippets:
+      - rm /opt && mkdir /opt
+
+  # Install all packages (migrated from build.sh lines 13-24 + COPR on line 19)
+  - type: dnf
+    repos:
+      copr:
+        - avengemedia/dms
+    install:
+      packages:
+        # Fedora packages
+        - tmux
+        - blueman
+        - dex-autostart
+        - sway
+        - waybar
+        - ulauncher
+        - dunst
+        - wlogout
+        - xdg-desktop-portal-wlr
+        - network-manager-applet
+        - pasystray
+        - fuzzel
+        - zile
+        - wdisplays
+        - swayidle
+        - wob
+        - syncthing
+        - telnet
+        - kitty
+        - btrbk
+        - wl-mirror
+        - kanshi
+        - quickemu
+        - autofs
+        - bubblewrap
+        - wtype
+        - open-eid
+        - gocryptfs
+        - fuse3
+        - fuse3-libs
+        - python3-amd-debug-tools
+        # COPR packages (avengemedia/dms)
+        - dms
+        - niri
+        - python3-vdirsyncer
+        - khal
+        - python3-aiohttp-oauthlib
+        - adw-gtk3-theme
+        - qt6ct
+        # Google Chrome (URL-based RPM install is supported by the dnf module)
+        - https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
+  # Install Emacs with --exclude=info (kept as script to preserve the exact flag)
+  - type: script
+    snippets:
+      - dnf5 install -y emacs emacsclient --exclude=info
+
+  # Enable podman.socket (migrated from build.sh line 35)
+  - type: systemd
+    system:
+      enabled:
+        - podman.socket
+
+  # Set up image signing
+  - type: signing
