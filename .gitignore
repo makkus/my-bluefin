@@ -1,4 +1,6 @@
 cosign.key
-_build_*
-output
-_build-*/**
+cosign.private
+/Containerfile
+*.iso
+*.iso-CHECKSUM
+/.bluebuild-scripts_*
