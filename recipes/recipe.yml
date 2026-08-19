@@ -7,6 +7,10 @@ base-image: ghcr.io/ublue-os/bluefin-dx
 image-version: stable
 
 modules:
+  # try to fix display freeze issue
+  - type: kargs
+    kargs:
+      - amdgpu.dcdebugmask=0x10
   # Make /opt immutable (migrated from Containerfile line 26)
   - type: script
     snippets:
